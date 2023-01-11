@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+
+void merge(int arr[],int start,int mid,int end)
+{
+  int lungime1=mid-start+1;
+  int lungime2=end-mid;
+  int leftArr[lungime1],rightArr[lungime2];
+
+  for(int i=0;i<lungime1;i++)
+    leftArr[i]=arr[start+i];
+  for(int j=0;j<lungime2;j++)
+    rightArr[j]=arr[mid+1+ j];
+
+  int i,j,k;
+  i=0;
+  j=0;
+  k=start;
+
+  while(i<lungime1&&j<lungime2) 
+  {
+    if(leftArr[i]<=rightArr[j]) 
+    {
+      arr[k]=leftArr[i];
+      i++;
+    } 
+    else 
+    {
+      arr[k]=rightArr[j];
+      j++; 
+    }
+    k++;
+  }  
+  while (i<lungime1) 
+  {
+    arr[k]=leftArr[i];
+    i++;
+    k++; }
+  while (j<lungime2) 
+  {
+    arr[k]=rightArr[j];
+    j++;
+    k++; }}
+    
+void mergeSort(int arr[],int start,int end) 
+{
+  if (start<end) 
+  {
+    int mid=start+(end-start)/2;
+    mergeSort(arr,start,mid);
+    mergeSort(arr,mid+1,end);
+    merge(arr,start,mid,end); }}
+
+void display(int arr[],int size) 
+{
+  for (int i=0;i<size;i++)
+    cout<<arr[i]<<" ";
+    cout<<endl; }
+int main() 
+{
+    // in urmatoarea linie se adauga elementele pentru array.
+  int arr[]={ };
+  int size=sizeof(arr)/sizeof(arr[0]);
+
+  cout<<"Original array \n";
+  display(arr,size);  
+  
+  mergeSort(arr,0,size-1);
+
+  cout<<"Sorted array \n";
+  display(arr,size);
+  return 0; }
